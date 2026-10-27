@@ -58,7 +58,7 @@ export const dashboardRoles: Record<DashboardRole, DashboardRoleConfig> = {
       { label: "My Classes", href: "/dashboard/teacher/classes", icon: School },
       { label: "Subjects", href: "/dashboard/teacher/subjects", icon: BookOpen },
       { label: "Question Bank", href: "/dashboard/teacher/question-bank", icon: Library },
-      { label: "Create Examination", href: "/dashboard/teacher/create-examination", icon: Sparkles },
+      { label: "Create Examination", href: "/dashboard/teacher/examinations/create", icon: Sparkles },
       { label: "Examinations", href: "/dashboard/teacher/examinations", icon: ClipboardCheck },
       { label: "Results", href: "/dashboard/teacher/results", icon: Trophy },
       { label: "Student Performance", href: "/dashboard/teacher/performance", icon: LineChart },

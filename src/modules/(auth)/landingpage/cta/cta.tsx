@@ -24,7 +24,7 @@ export default function CTA() {
             </a>
 
             <a
-              href="/demo"
+              href="/signup"
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white/70 bg-white/10 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-600 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-auto"
             >
               <CalendarDays className="h-5 w-5" aria-hidden="true" />

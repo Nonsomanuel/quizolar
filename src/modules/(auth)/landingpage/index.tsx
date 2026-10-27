@@ -1,6 +1,7 @@
 "use client";
 
 // import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/header";
 import { Separator } from "@/components/ui/separator";
 import Dashboard from "./dashboard/dashboard";
@@ -41,42 +42,48 @@ export default function LandingPage() {
           WAEC and JAMB.
         </h2>
         <div className="mt-6 flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4">
-          <button className="rounded-lg bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+          <Link
+            href="/signup"
+            className="rounded-lg bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700"
+          >
             Start Free Trial
-          </button>
-          <button className="rounded-lg bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+          </Link>
+          <Link
+            href="/signup"
+            className="rounded-lg bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700"
+          >
             Book Demo
-          </button>
+          </Link>
         </div>
       </div>
 
       {/* Feature section */}
       <Separator className="mx-auto w-5/6 max-w-2/3 sm:w-full" />
-      <div className="w-full">
+      <div id="features" className="w-full">
         <FeatureCards />
       </div>
 
       {/* How it works */}
       <Separator className="mx-auto my-6 w-5/6 max-w-2/3 sm:w-full" />
-      <div className="w-full">
+      <div id="how-it-works" className="w-full">
         <HowItWorks />
       </div>
 
       {/* Exam Categories */}
       <Separator className="mx-auto my-6 w-5/6 max-w-2/3 sm:w-full" />
-      <div className="w-full">
+      <div id="exams" className="w-full">
         <ExamCategories />
       </div>
 
       {/* Testimonials */}
       <Separator className="mx-auto my-6 w-5/6 max-w-2/3 sm:w-full" />
-      <div className="w-full">
+      <div id="testimonials" className="w-full">
         <Testimonials />
       </div>
 
       {/* FAQ */}
       <Separator className="mx-auto my-6 w-5/6 max-w-2/3 sm:w-full" />
-      <div className="w-full">
+      <div id="faq" className="w-full">
         <FAQ />
       </div>
 

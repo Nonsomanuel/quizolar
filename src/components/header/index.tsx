@@ -29,7 +29,7 @@ const navigation = [
       },
       {
         name: "For Schools",
-        href: "#schools",
+        href: "#features",
       },
       {
         name: "Mock Exams",
@@ -39,19 +39,19 @@ const navigation = [
   },
   {
     name: "Solutions",
-    href: "#solutions",
+    href: "#how-it-works",
   },
   {
     name: "Pricing",
-    href: "#pricing",
+    href: "#faq",
   },
   {
     name: "Resources",
-    href: "#resources",
+    href: "#testimonials",
   },
   {
     name: "About",
-    href: "#about",
+    href: "#testimonials",
   },
 ];
 

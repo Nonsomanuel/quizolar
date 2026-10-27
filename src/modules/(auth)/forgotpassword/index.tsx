@@ -244,7 +244,7 @@ export default function ForgotPasswordPage() {
 
           {/* Back to login */}
           <Link
-            href="/auth/login"
+            href="/login"
             className="mt-8 flex items-center justify-center gap-2 text-sm font-semibold text-slate-600 transition hover:text-violet-700"
           >
             <ArrowLeftIcon className="h-4 w-4" />

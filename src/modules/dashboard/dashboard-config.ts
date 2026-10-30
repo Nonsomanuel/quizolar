@@ -55,6 +55,7 @@ export const dashboardRoles: Record<DashboardRole, DashboardRoleConfig> = {
     description: "Plan lessons, manage assessments, and support your learners.",
     nav: [
       { label: "Overview", href: "/dashboard/teacher", icon: LayoutDashboard },
+      { label: "Students", href: "/dashboard/teacher/students", icon: Users },
       { label: "My Classes", href: "/dashboard/teacher/classes", icon: School },
       { label: "Subjects", href: "/dashboard/teacher/subjects", icon: BookOpen },
       { label: "Question Bank", href: "/dashboard/teacher/question-bank", icon: Library },

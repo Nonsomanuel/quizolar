@@ -9,7 +9,7 @@ export function DashboardOverview({ role }: { role: DashboardRole }) {
   const data = overviewData[role]
   const config = dashboardRoles[role]
   const actionLinks: Record<DashboardRole, string[]> = {
-    admin: ["/dashboard/admin/students", "/dashboard/teacher/examinations/create"],
+    admin: ["/dashboard/admin/students", "/dashboard/admin/examinations"],
     teacher: ["/dashboard/teacher/examinations/create", "/dashboard/teacher/question-bank"],
     student: ["/dashboard/student/examinations", "/dashboard/student/practice"],
   }

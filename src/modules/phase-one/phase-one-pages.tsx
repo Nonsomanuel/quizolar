@@ -31,9 +31,9 @@ const seedRows: Record<Exclude<ManagementKind, "results" | "performance" | "prac
   subjects: ["Mathematics · MAT · 4 classes", "English Language · ENG · 5 classes", "Physics · PHY · 2 classes", "Basic Science · BSC · 3 classes"],
 }
 
-export function DemoManagementPage({ kind }: { kind: ManagementKind }) {
+export function DemoManagementPage({ kind, role }: { kind: ManagementKind; role?: DashboardRole }) {
   const copy = managementCopy[kind]
-  return <DashboardShell role={copy.role}><ManagementContent kind={kind} /></DashboardShell>
+  return <DashboardShell role={role ?? copy.role}><ManagementContent kind={kind} /></DashboardShell>
 }
 
 function ManagementContent({ kind }: { kind: ManagementKind }) {

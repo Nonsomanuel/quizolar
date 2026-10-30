@@ -3,6 +3,7 @@ import { examinationService } from "@/modules/examinations/examination-service"
 import type { Examination } from "@/modules/examinations/examination-types"
 
 export type StudentExamAvailability = "available" | "upcoming" | "closed" | "invalid"
+export type StudentExamQuestion = { id: string; questionText: string; type: "multiple-choice" | "true-false"; options: { id: string; text: string }[]; correctOptionId: string; marks: number }
 
 export function getStudentExaminations() {
   return examinationService.list().filter((exam) => exam.status === "published")
@@ -24,6 +25,6 @@ export function getExamAvailability(examination: Examination, now = new Date()):
   return "available"
 }
 
-export function getStudentExamQuestions(examinationId: string) {
-  return examinationQuestionService.list(examinationId).map(({ question, ...assignment }) => ({ id: assignment.questionId, questionText: question.questionText, type: question.type, options: question.options, marks: assignment.marksOverride ?? question.marks }))
+export function getStudentExamQuestions(examinationId: string): StudentExamQuestion[] {
+  return examinationQuestionService.list(examinationId).map(({ question, ...assignment }) => ({ id: assignment.questionId, questionText: question.questionText, type: question.type, options: question.options, correctOptionId: question.correctOptionId, marks: assignment.marksOverride ?? question.marks }))
 }

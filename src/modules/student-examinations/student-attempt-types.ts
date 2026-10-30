@@ -8,5 +8,6 @@ export type StudentAttempt = {
   startedAt: string
   submittedAt?: string
   answers: Record<string, string>
+  flaggedQuestionIds: string[]
   remainingSeconds: number
 }

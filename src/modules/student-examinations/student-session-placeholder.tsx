@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { Construction, RotateCcw } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { studentAttemptService } from "./student-attempt-service"
 

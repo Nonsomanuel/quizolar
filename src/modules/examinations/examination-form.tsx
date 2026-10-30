@@ -7,13 +7,13 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { examinationService } from "./examination-service"
-import { examinationClasses, examinationSubjects, type ExaminationDraftInput } from "./examination-types"
+import { examinationClasses, examinationSubjects, type Examination, type ExaminationDraftInput } from "./examination-types"
 
 type FormState = { title: string; description: string; subjectId: string; classId: string; instructions: string; durationMinutes: string; startAt: string; endAt: string; totalMarks: string; maxAttempts: string; randomizeQuestions: boolean; randomizeOptions: boolean; allowReview: boolean; resultVisibility: "immediately" | "after-review" | "hidden" }
 const initialState: FormState = { title: "", description: "", subjectId: "", classId: "", instructions: "", durationMinutes: "60", startAt: "", endAt: "", totalMarks: "50", maxAttempts: "1", randomizeQuestions: true, randomizeOptions: false, allowReview: true, resultVisibility: "immediately" }
 
-export function ExaminationForm() {
-  const [form, setForm] = useState<FormState>(initialState)
+export function ExaminationForm({ existing }: { existing?: Examination } = {}) {
+  const [form, setForm] = useState<FormState>(() => existing ? { title: existing.title, description: existing.description, subjectId: existing.subjectId, classId: existing.classId, instructions: existing.instructions, durationMinutes: String(existing.durationMinutes), startAt: existing.startAt.slice(0, 16), endAt: existing.endAt.slice(0, 16), totalMarks: String(existing.totalMarks), maxAttempts: String(existing.settings.maxAttempts), randomizeQuestions: existing.settings.randomizeQuestions, randomizeOptions: existing.settings.randomizeOptions, allowReview: existing.settings.allowReview, resultVisibility: existing.settings.resultVisibility } : initialState)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [notice, setNotice] = useState("")
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => setForm((current) => ({ ...current, [key]: value }))
@@ -36,9 +36,14 @@ export function ExaminationForm() {
     const classroom = examinationClasses.find((item) => item.id === form.classId)
     if (!subject || !classroom) return
     const input: ExaminationDraftInput = { title: form.title.trim(), description: form.description.trim(), subjectId: subject.id, subjectName: subject.name, classId: classroom.id, className: classroom.name, durationMinutes: Number(form.durationMinutes), totalMarks: Number(form.totalMarks), questionCount: 0, startAt: form.startAt ? new Date(form.startAt).toISOString() : new Date(Date.now() + 86400000).toISOString(), endAt: form.endAt ? new Date(form.endAt).toISOString() : new Date(Date.now() + 90000000).toISOString(), instructions: form.instructions.trim(), settings: { maxAttempts: Number(form.maxAttempts), randomizeQuestions: form.randomizeQuestions, randomizeOptions: form.randomizeOptions, allowReview: form.allowReview, resultVisibility: form.resultVisibility }, status: requestedStatus }
-    examinationService.createDraft(input)
-    setNotice(requestedStatus === "published" ? "Saved locally as a published demonstration state. It is not available to real students." : "Draft saved locally in this browser.")
-    if (requestedStatus === "draft") setForm(initialState)
+    if (existing) {
+      examinationService.update(existing.id, { ...input, questionCount: existing.questionCount, status: existing.status })
+      setNotice("Examination details updated locally. Assigned questions were preserved.")
+    } else {
+      examinationService.createDraft(input)
+      setNotice(requestedStatus === "published" ? "Saved locally as a published demonstration state. It is not available to real students." : "Draft saved locally in this browser.")
+      if (requestedStatus === "draft") setForm(initialState)
+    }
   }
   const field = (key: keyof FormState, label: string, control: React.ReactNode, description?: string) => <label className="flex flex-col gap-2 text-sm font-medium" data-invalid={Boolean(errors[key])}><span>{label}{["title", "subjectId", "classId"].includes(key) && <span className="text-destructive"> *</span>}</span>{control}{description && <span className="text-xs font-normal text-muted-foreground">{description}</span>}{errors[key] && <span className="text-xs font-normal text-destructive">{errors[key]}</span>}</label>
   const inputClass = "min-h-11 rounded-xl border bg-background px-3 text-sm outline-none focus-visible:ring-4 focus-visible:ring-ring/20"
